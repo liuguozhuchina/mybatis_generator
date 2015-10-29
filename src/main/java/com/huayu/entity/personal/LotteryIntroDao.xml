@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huayu.entity.personal.LotteryIntroDao">
+    <resultMap id="lotteryIntro" type="com.huayu.entity.personal.LotteryIntro">
+        <id column="id" property="id"/>
+        <result column="type_code" property="typeCode"/>
+        <result column="lottery_id" property="lotteryId"/>
+        <result column="intro" property="intro"/>
+    </resultMap>
+
+    <!-- Select SQL -->
+    <sql id="selector">
+        SELECT
+        <if test="fields != null and fields!='' ">
+        ${fields}
+        </if>
+        <if test="fields == null or fields=='' ">
+        id,type_code,lottery_id,intro
+        </if>
+        FROM lottery_intro
+    </sql>
+
+    <!-- Where SQL -->
+    <sql id="Listwhere">
+     <where>
+        <if test="id!= null ">
+            AND id= #{id}
+        </if>
+        <if test="typeCode!= null ">
+            AND type_code= #{typeCode}
+        </if>
+        <if test="lotteryId!= null ">
+            AND lottery_id= #{lotteryId}
+        </if>
+        <if test="intro!= null and intro!='' ">
+            AND intro= #{intro}
+        </if>
+     </where>
+    </sql>
+
+    <!-- Order SQL -->
+    <sql id="Listorder">
+        <if test="orderFields != null and orderFields.size >0">
+            order by
+            <foreach collection="orderFields" separator="," item="orderField">
+            ${orderField.fieldName} ${orderField.order}
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- Page limit SQL -->
+    <sql id="ListLimit">
+        <if test="startRow >=0">
+         limit #{startRow},#{pageSize}
+        </if>
+    </sql>
+
+    <!-- 添加 -->
+    <insert id="addLotteryIntro" parameterType="com.huayu.entity.personal.LotteryIntro">
+        INSERT INTO  lottery_intro
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!= null ">
+             id,
+            </if>
+            <if test="typeCode!= null ">
+             type_code,
+            </if>
+            <if test="lotteryId!= null ">
+             lottery_id,
+            </if>
+            <if test="intro!= null and intro!='' ">
+             intro,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="id!= null ">
+              #{id},
+            </if>
+            <if test="typeCode!= null ">
+              #{typeCode},
+            </if>
+            <if test="lotteryId!= null ">
+              #{lotteryId},
+            </if>
+            <if test="intro!= null and intro!='' ">
+              #{intro},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 批量添加 -->
+    <insert id="addLotteryIntros" parameterType="java.util.List">
+        INSERT INTO  lottery_intro(id,type_code,lottery_id,intro)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.typeCode},#{item.lotteryId},#{item.intro})
+        </foreach>
+    </insert>
+
+    <!-- 根据主键删除 -->
+    <delete id="deleteByKey" parameterType="long">
+        DELETE FROM  lottery_intro
+        WHERE   id=#{id}
+    </delete>
+
+    <!-- 根据主键批量删除 -->
+    <delete id="deleteByKeys">
+        DELETE FROM  lottery_intro
+        WHERE    id in
+        <foreach collection="list" separator="," item="id" open="(" close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <!-- 根据条件删除 -->
+    <delete id="deleteByQuery" parameterType="com.huayu.entity.personal.LotteryIntro">
+        DELETE FROM  lottery_intro
+        <include refid="Listwhere" />
+    </delete>
+
+    <!-- 根据条件删除 -->
+    <delete id="deleteByMap" parameterType="map">
+        DELETE FROM  lottery_intro
+        <include refid="Listwhere" />
+    </delete>
+
+       <!-- 根据主键更新 -->
+    <update id="updateLotteryIntroByKey" parameterType="com.huayu.entity.personal.LotteryIntro">
+        UPDATE lottery_intro
+        <set>
+            <trim suffixOverrides=",">
+                <if test="id!= null ">
+                id= #{id},
+                </if>
+                <if test="typeCode!= null ">
+                type_code= #{typeCode},
+                </if>
+                <if test="lotteryId!= null ">
+                lottery_id= #{lotteryId},
+                </if>
+                <if test="intro!= null and intro!='' ">
+                intro= #{intro},
+                </if>
+            </trim>
+        </set>
+        WHERE  id= #{id}
+    </update>
+
+    <!-- 根据map更新 -->
+    <update id="updateLotteryIntroByMap" parameterType="map">
+        UPDATE lottery_intro
+        <set>
+            <trim suffixOverrides=",">
+                <if test="id!= null" >
+                id= #{id},
+                </if>
+                <if test="typeCode!= null" >
+                type_code= #{typeCode},
+                </if>
+                <if test="lotteryId!= null" >
+                lottery_id= #{lotteryId},
+                </if>
+                <if test="intro!= null and intro!=''" >
+                intro= #{intro},
+                </if>
+            </trim>
+        </set>
+        WHERE  id= #{id}
+    </update>
+
+    <!-- 根据主键查询 -->
+    <select id="getLotteryIntroByKey" resultMap="lotteryIntro" parameterType="com.huayu.entity.personal.LotteryIntro">
+        SELECT id,type_code,lottery_id,intro FROM lottery_intro
+        WHERE  id= #{id}
+    </select>
+
+    <!-- 根据主键批量查询 -->
+    <select id="getLotteryIntrosByKeys" resultMap="lotteryIntro" parameterType="map">
+        SELECT id,type_code,lottery_id,intro FROM lottery_intro
+        WHERE
+    id in
+        <foreach collection="list" separator="," item="id" open="(" close=")">
+        #{id}
+        </foreach>
+    </select>
+
+    <!-- 分页 -->
+    <select id="getLotteryIntroListWithPage" parameterType="map" resultMap="lotteryIntro">
+        <include refid="selector" />
+        <include refid="Listwhere" />
+        <include refid="Listorder" />
+        <include refid="ListLimit" />
+    </select>
+
+    <!-- 数据集合 -->
+    <select id="getLotteryIntroList" parameterType="map" resultMap="lotteryIntro">
+        <include refid="selector" />
+        <include refid="Listwhere" />
+        <include refid="Listorder" />
+    </select>
+
+    <!-- 数据总数 -->
+    <select id="getLotteryIntroListCount" parameterType="map" resultType="int">
+        SELECT count(1) FROM lottery_intro
+        <include refid="Listwhere" />
+    </select>
+
+
+
+</mapper>
+
+
+
