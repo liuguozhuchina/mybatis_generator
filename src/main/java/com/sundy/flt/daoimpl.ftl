@@ -33,7 +33,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try {
       return this.getSqlSession().insert("${entity_p}.${Entity}Dao.add${Entity}", ${entity});
     } catch (Exception e) {
-    throw new SQLException("${entity_p}.${Entity}Dao.add${Entity}", e);
+    throw new SQLException("${dao_p}.${Entity}Dao.add${Entity}()", e);
     }
     }
 
@@ -46,7 +46,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try {
     return this.getSqlSession().insert("${entity_p}.${Entity}Dao.add${Entity}s", list);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.add${Entity}s", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.add${Entity}s()", e);
     }
     }
 
@@ -60,7 +60,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().delete("${entity_p}.${Entity}Dao.deleteByKey", id);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.deleteByKey", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.deleteByKey()", e);
     }
     }
 
@@ -74,7 +74,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().delete("${entity_p}.${Entity}Dao.deleteByKeys", keys);
      }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.deleteByKeys", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.deleteByKeys()", e);
      }
     }
 
@@ -88,7 +88,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().delete("${entity_p}.${Entity}Dao.deleteByQuery", ${entity}Query);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.deleteByQuery", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.deleteByQuery()", e);
      }
     }
 
@@ -103,7 +103,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().delete("${entity_p}.${Entity}Dao.deleteByMap", map);
     }catch (Exception e) {
-    throw new SQLException("${entity_p}.${Entity}Dao.deleteByMap", e);
+    throw new SQLException("${dao_p}.${Entity}Dao.deleteByMap()", e);
     }
     }
     /**
@@ -116,7 +116,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().update("${entity_p}.${Entity}Dao.update${Entity}ByKey", ${entity});
      }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.update${Entity}ByKey", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.update${Entity}ByKey()", e);
      }
     }
 
@@ -130,7 +130,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().update("${entity_p}.${Entity}Dao.update${Entity}ByMap", map);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.update${Entity}ByMap", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.update${Entity}ByMap()", e);
     }
     }
 
@@ -143,7 +143,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
      try{
     return (${Entity})this.getSqlSession().selectOne("${entity_p}.${Entity}Dao.get${Entity}ByKey",id);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.get${Entity}ByKey", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.get${Entity}ByKey()", e);
     }
     }
 
@@ -156,7 +156,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().selectList("${entity_p}.${Entity}Dao.get${Entity}sByKeys",idList);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.get${Entity}ByKeys", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.get${Entity}ByKeys()", e);
     }
     }
 
@@ -169,7 +169,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return this.getSqlSession().selectList("${entity_p}.${Entity}Dao.get${Entity}List",map);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.get${Entity}List", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.get${Entity}List()", e);
     }
     }
 
@@ -189,7 +189,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
         PageBean<${Entity}> pageBean = new PageBean<${Entity}>(currentPage, pageSize, count, list);
         return pageBean;
      }catch (Exception e) {
-      throw new SQLException("${entity_p}.${Entity}Dao.get${Entity}ListWithPag", e);
+      throw new SQLException("${dao_p}.${Entity}Dao.get${Entity}ListWithPag()", e);
      }
     }
 
@@ -201,7 +201,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
     try{
     return (Integer)this.getSqlSession().selectOne("${entity_p}.${Entity}Dao.get${Entity}ListCount",map);
     }catch (Exception e) {
-     throw new SQLException("${entity_p}.${Entity}Dao.get${Entity}ListCount", e);
+     throw new SQLException("${dao_p}.${Entity}Dao.get${Entity}ListCount()", e);
     }
     }
 }

@@ -38,7 +38,7 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     } catch (SQLException e) {
        throw e;
     }catch (Exception e) {
-
+      throw new ServiceException("add${Entity}", e);
     }
     return false;
     }
