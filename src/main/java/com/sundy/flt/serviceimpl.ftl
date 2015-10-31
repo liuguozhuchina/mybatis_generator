@@ -7,6 +7,7 @@ import ${dao_p}.${Entity}Dao;
 import ${query_p}.${Entity}Query;
 import ${service_p}.${Entity}Service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.Map;
 @Service
 public class  ${Entity}ServiceImpl implements ${Entity}Service {
 
+    private static Logger logger = Logger.getLogger(${Entity}ServiceImpl.class);
 
 
     @Autowired
@@ -36,11 +38,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
        return ${entity}Dao.add${Entity}(${entity})>0;
     } catch (SQLException e) {
+       logger.error("${service_p}.${Entity}Service.add${Entity} SQLException ${entity}="+${entity},e);
        throw e;
     }catch (Exception e) {
-      throw new ServiceException("add${Entity}", e);
-    }
-    return false;
+      logger.error("${service_p}.${Entity}Service.add${Entity} ServiceException ${entity}="+${entity},e);
+      throw new ServiceException("${service_p}.${Entity}Service.add${Entity}", e);
+     }
     }
 
     /**
@@ -52,11 +55,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.add${Entity}s(list)>0;
     } catch (SQLException e) {
-    throw e;
+       logger.error("${service_p}.${Entity}Service.add${Entity}s SQLException list="+list,e);
+       throw e;
     }catch (Exception e) {
-
+      logger.error("${service_p}.${Entity}Service.add${Entity}s ServiceException list="+list,e);
+      throw new ServiceException("${service_p}.${Entity}Service.add${Entity}s", e);
     }
-    return false;
     }
 
     /**
@@ -69,11 +73,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.deleteByKey(id)>0;
     } catch (SQLException e) {
-    throw e;
+      logger.error("${service_p}.${Entity}Service.deleteByKey SQLException id="+id,e);
+      throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.deleteByKey ServiceException id="+id,e);
+     throw new ServiceException("${service_p}.${Entity}Service.deleteByKey", e);
     }
-    return false;
     }
 
     /**
@@ -86,11 +91,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.deleteByKeys(idList)>0;
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.deleteByKeys SQLException idList="+idList,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.deleteByKeys ServiceException idList="+idList,e);
+     throw new ServiceException("${service_p}.${Entity}Service.deleteByKeys", e);
     }
-    return false;
     }
 
     /**
@@ -103,11 +109,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.deleteByQuery(${entity}Query)>0;
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.deleteByQuery SQLException ${entity}Query="+${entity}Query,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.deleteByQuery ServiceException ${entity}Query="+${entity}Query,e);
+     throw new ServiceException("${service_p}.${Entity}Service.deleteByQuery", e);
     }
-    return false;
     }
 
 
@@ -121,11 +128,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.deleteByMap(map)>0;
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.deleteByMap SQLException map="+map,e);
+     throw e;
     }catch (Exception e) {
-
+      logger.error("${service_p}.${Entity}Service.deleteByMap ServiceException map="+map,e);
+      throw new ServiceException("${service_p}.${Entity}Service.deleteByMap", e);
     }
-    return false;
     }
 
     /**
@@ -138,11 +146,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.update${Entity}ByKey(${entity})>0;
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.update${Entity}ByKey SQLException ${entity}="+${entity},e);
+     throw e;
     }catch (Exception e) {
-
+      logger.error("${service_p}.${Entity}Service.update${Entity}ByKey ServiceException ${entity}="+${entity},e);
+      throw new ServiceException("${service_p}.${Entity}Service.update${Entity}ByKey", e);
     }
-    return false;
     }
 
     /**
@@ -153,13 +162,14 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     */
     public boolean update${Entity}ByMap(Map<String,Object>  map) throws SQLException,ServiceException{
     try {
-    return ${entity}Dao. update${Entity}ByMap(map)>0;
+    return ${entity}Dao.update${Entity}ByMap(map)>0;
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.update${Entity}ByMap SQLException map="+map,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.update${Entity}ByMap ServiceException map="+map,e);
+     throw new ServiceException("${service_p}.${Entity}Service.update${Entity}ByMap", e);
     }
-    return false;
     }
 
     /**
@@ -171,11 +181,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.get${Entity}ByKey(id);
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.get${Entity}ByKey SQLException id="+id,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.get${Entity}ByKey ServiceException id="+id,e);
+     throw new ServiceException("${service_p}.${Entity}Service.get${Entity}ByKey", e);
     }
-    return null;
     }
 
     /**
@@ -187,11 +198,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.get${Entity}sByKeys(idList);
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.get${Entity}sByKeys SQLException idList="+idList,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.get${Entity}sByKeys ServiceException idList="+idList,e);
+     throw new ServiceException("${service_p}.${Entity}Service.get${Entity}sByKeys", e);
     }
-    return null;
     }
 
     /**
@@ -201,13 +213,14 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     */
     public List<${Entity}> get${Entity}List(Map<String,Object>  map) throws SQLException,ServiceException{
     try {
-    return ${entity}Dao.get${Entity}List(map);
+     return ${entity}Dao.get${Entity}List(map);
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.get${Entity}List SQLException map="+map,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.get${Entity}sByKeys ServiceException map="+map,e);
+     throw new ServiceException("${service_p}.${Entity}Service.get${Entity}List", e);
     }
-    return null;
     }
 
     /**
@@ -219,11 +232,12 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     try {
     return ${entity}Dao.get${Entity}ListWithPage(map);
     } catch (SQLException e) {
-    throw e;
+      logger.error("${service_p}.${Entity}Service.get${Entity}ListWithPage SQLException map="+map,e);
+      throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.get${Entity}ListWithPage ServiceException map="+map,e);
+     throw new ServiceException("${service_p}.${Entity}Service.get${Entity}ListWithPage", e);
     }
-    return null;
     }
 
     /**
@@ -232,14 +246,14 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
     */
     public int get${Entity}ListCount(Map<String, Object> map) throws SQLException,ServiceException{
     try {
-
     return ${entity}Dao.get${Entity}ListCount(map);
     } catch (SQLException e) {
-    throw e;
+     logger.error("${service_p}.${Entity}Service.get${Entity}ListCount SQLException map="+map,e);
+     throw e;
     }catch (Exception e) {
-
+     logger.error("${service_p}.${Entity}Service.get${Entity}ListCount ServiceException map="+map,e);
+     throw new ServiceException("${service_p}.${Entity}Service.get${Entity}ListCount", e);
     }
-    return 0;
     }
 
 
