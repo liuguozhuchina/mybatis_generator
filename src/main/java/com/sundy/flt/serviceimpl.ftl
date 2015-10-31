@@ -218,7 +218,7 @@ public class  ${Entity}ServiceImpl implements ${Entity}Service {
      logger.error("${service_p}.${Entity}Service.get${Entity}List SQLException map="+map,e);
      throw e;
     }catch (Exception e) {
-     logger.error("${service_p}.${Entity}Service.get${Entity}sByKeys ServiceException map="+map,e);
+     logger.error("${service_p}.${Entity}Service.get${Entity}List ServiceException map="+map,e);
      throw new ServiceException("${service_p}.${Entity}Service.get${Entity}List", e);
     }
     }
