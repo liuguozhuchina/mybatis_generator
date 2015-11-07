@@ -48,9 +48,10 @@ public class ${Entity}Query{
     return startRow;
     }
 
-    public void setStartRow(int startRow) {
-    this.startRow = startRow;
-    queryUpdateMap.put("startRow",startRow);
+    public void setCurrentPage(int currentPage) {
+    int pageSize = (Integer) queryUpdateMap.get("pageSize");
+    this.startRow = (currentPage - 1) * pageSize;
+    queryUpdateMap.put("startRow", startRow);
     }
 
     public int getPageSize() {
@@ -210,8 +211,10 @@ public class ${Entity}Query{
 
 
 <#macro fieldType type>
-    <#if type?contains("bigint") || type?contains("decimal")>
+    <#if type?contains("bigint")>
         long<#t/>
+    <#elseif type?contains("decimal")>
+        BigDecimal<#t/>
     <#elseif type?contains("smallint")>
         short<#t/>
     <#elseif type?contains("bit(1)") || type?contains("tinyint(1)")>

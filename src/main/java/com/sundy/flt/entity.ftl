@@ -38,8 +38,10 @@ private static final long serialVersionUID = 1L;
     }
     }
 <#macro fieldType type>
-    <#if type?contains("bigint") || type?contains("decimal")>
+    <#if type?contains("bigint")>
     long<#t/>
+    <#elseif type?contains("decimal")>
+    BigDecimal<#t/>
     <#elseif type?contains("smallint")>
     short<#t/>
     <#elseif type?contains("bit(1)") || type?contains("tinyint(1)")>
