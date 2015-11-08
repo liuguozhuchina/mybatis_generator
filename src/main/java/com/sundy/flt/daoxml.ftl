@@ -23,15 +23,38 @@
         FROM ${table}
     </sql>
 
+
     <!-- Where SQL -->
     <sql id="Listwhere">
-     <where>
-    <#list fields as field>
-        <if test="<#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>!= null<@fieldLike type=field.fieldType> and <#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>!=''</@fieldLike> ">
-            AND ${field.name}= ${r'#'}{<#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>}
+        <where>
+        <#list fields as field>
+            <if test="<#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>!= null<@fieldLike type=field.fieldType> and <#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>!=''</@fieldLike> ">
+                AND ${field.name}= ${r'#'}{<#list field.name?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>}
+            </if>
+        </#list>
+        <if test="oredCriteria!=null">
+                <foreach collection="oredCriteria.criterion" item="criterion">
+                    <choose>
+                        <when test="criterion.noValue">
+                            and  ${r'${criterion.condition}'}
+                        </when>
+                        <when test="criterion.singleValue">
+                            and  ${r'${criterion.condition}'}  ${r'#{criterion.value}'}
+                        </when>
+                        <when test="criterion.betweenValue">
+                            and ${r'${criterion.condition}'}  ${r'#{criterion.value}'} and  ${r'#{criterion.secondValue}'}
+                        </when>
+                        <when test="criterion.listValue">
+                            and ${r'${criterion.condition}'}
+                            <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                            ${r'#{listItem}'}
+                            </foreach>
+                        </when>
+                    </choose>
+                </foreach>
         </if>
-    </#list>
-     </where>
+
+        </where>
     </sql>
 
     <!-- Order SQL -->
@@ -172,7 +195,6 @@
         SELECT count(1) FROM ${table}
         <include refid="Listwhere" />
     </select>
-
 
 
 </mapper>
