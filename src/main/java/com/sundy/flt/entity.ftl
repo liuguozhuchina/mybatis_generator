@@ -1,7 +1,9 @@
 package ${entity_p};
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.io.Serializable;
+
 
 /**
 *
