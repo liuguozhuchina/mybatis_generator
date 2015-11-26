@@ -174,6 +174,19 @@ public class ${Entity}Query{
         }
         }
 
+    public void setField(String fieldName) {
+    StringBuffer sb = new StringBuffer(fields == null ? "" : fields);
+    //数据库字段
+    String colunm = getFieldSet().get(fieldName) + ",";
+    if (StringUtils.isEmpty(fields)) {
+    fields = sb.append(colunm).substring(0, sb.length() - 1);
+    } else {
+    fields = sb.append("," + colunm).substring(0, sb.length() - 1);
+    }
+    queryUpdateMap.put("fields", fields);
+
+    }
+
     /**
     * ==============================查询更新map条件======================
     **/
