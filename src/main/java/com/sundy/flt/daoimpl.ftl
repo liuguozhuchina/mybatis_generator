@@ -184,7 +184,7 @@ public class  ${Entity}DaoImpl extends SqlSessionDaoSupport implements ${Entity}
         int count = get${Entity}ListCount(map);
         //查询数据
         List<${Entity}> list = this.getSqlSession().selectList("${entity_p}.${Entity}Dao.get${Entity}ListWithPage",map);
-        int currentPage = (Integer) map.get("startRow");
+        int currentPage = (Integer) map.get("currentPage");
         int pageSize = (Integer) map.get("pageSize");
         PageBean<${Entity}> pageBean = new PageBean<${Entity}>(currentPage, pageSize, count, list);
         return pageBean;

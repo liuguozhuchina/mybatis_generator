@@ -58,6 +58,7 @@ public class ${Entity}Query{
     int pageSize = (Integer) queryUpdateMap.get("pageSize");
     this.startRow = (currentPage - 1) * pageSize;
     queryUpdateMap.put("startRow", startRow);
+    queryUpdateMap.put("currentPage", currentPage);
     }
 
 
