@@ -335,7 +335,7 @@ public class ${Entity}Query{
     if (null == colunm || "".equals(colunm.trim())) {
     throw new RuntimeException("property " + colunm + " not exits");
     }
-    oredCriteria.addCriterion(colunm + "like", value, colunm);
+    oredCriteria.addCriterion(colunm + " like ", value, colunm);
     this.queryUpdateMap.put("oredCriteria", oredCriteria);
     }
 
